@@ -17,7 +17,7 @@
 
 ## 🛠️ 青龙面板部署
 
-1. **拉取仓库** (请替换为你的仓库地址):
+1. **拉取仓库** :
    
    ```bash
    ql repo [https://github.com/mikease/AliyunCheck.git] "ali_check" "" "notify"
