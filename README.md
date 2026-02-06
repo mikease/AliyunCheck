@@ -20,4 +20,11 @@
 1. **拉取仓库** (请替换为你的仓库地址):
    
    ```bash
-   ql repo [https://github.com/你的用户名/仓库名.git](https://github.com/你的用户名/仓库名.git) "ali_check" "" "notify"
+   ql repo [https://github.com/mikease/AliyunCheck.git](https://github.com/你的用户名/仓库名.git) "ali_check" "" "notify"
+   ```
+
+​	2.**安装依赖**: 在“依赖管理” -> “Python3” 中添加 `requests`。
+
+## 📝 免责声明
+
+本脚本仅用于个人学习和技术研究，请勿用于非法用途。
