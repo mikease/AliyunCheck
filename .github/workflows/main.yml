@@ -2,8 +2,8 @@ name: Aliyun Auto Checkin
 
 on:
   schedule:
-    # 每天北京时间早上 8:10 运行 (UTC 时间 0:10)
-    - cron: '10 0 * * *'
+    # 每天北京时间早上 9:00 运行 (UTC 时间 0:10)
+    - cron: '0 1 * * *'
   workflow_dispatch: # 允许你手动点击按钮运行
 
 jobs:
