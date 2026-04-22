@@ -1,35 +1,29 @@
-name: Aliyun Signin
+name: Aliyun Auto Checkin
 
 on:
   schedule:
-   # 每天国际时间 14:40 运行一次, 中国时间 22:40
-    - cron: '40 14 * * *'
-  workflow_dispatch:
+    # 每天北京时间早上 8:10 运行 (UTC 时间 0:10)
+    - cron: '10 0 * * *'
+  workflow_dispatch: # 允许你手动点击按钮运行
+
 jobs:
-  signin:
-    name: Aliyun Signin
+  checkin:
     runs-on: ubuntu-latest
     steps:
-      - uses: Yumu152068/aliyun-auto-signin@main
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          REFRESH_TOKENS: ${{ secrets.REFRESH_TOKENS }}
-          GP_TOKEN: ${{ secrets.GP_TOKEN}}
-          PUSH_TYPES: ''
-          DO_NOT_REWARD: 'false'
-          SERVERCHAN_SEND_KEY: ${{ secrets.SERVERCHAN_SEND_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-          PUSHPLUS_TOPIC: ${{ secrets.PUSHPLUS_TOPIC }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_TLS: ${{ secrets.SMTP_TLS }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          SMTP_SENDER: ${{ secrets.SMTP_SENDER }}
-          SMTP_RECEIVER: ${{ secrets.SMTP_RECEIVER }}
-          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-          CQHTTP_ENDPOINT: ${{ secrets.CQHTTP_ENDPOINT }}
-          CQHTTP_USER_ID: ${{ secrets.CQHTTP_USER_ID }}
-          CQHTTP_ACCESS_TOKEN: ${{ secrets.CQHTTP_ACCESS_TOKEN }}
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Checkin Script
+        env:
+          # 如果你的脚本需要环境变量（比如 Token），在这里引用
+          ALIYUN_TOKEN: ${{ secrets.ALIYUN_TOKEN }}
+        run: python ali_check.py # 假设你的启动文件是 main.py
