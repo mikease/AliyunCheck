@@ -25,5 +25,5 @@ jobs:
       - name: Run Checkin Script
         env:
           # 如果你的脚本需要环境变量（比如 Token），在这里引用
-          ALIYUN_TOKEN: ${{ secrets.ALIYUN_TOKEN }}
+          ALI_REFRESH_TOKEN: ${{ secrets.ALI_REFRESH_TOKEN }}
         run: python ali_check.py # 假设你的启动文件是 main.py
